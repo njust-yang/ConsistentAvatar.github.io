@@ -148,22 +148,23 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Pre-trained conditional diffusion models have demonstrated
-impressive potential in the editing of real-world images. Although these methods achieve reasonable editing effects, they
-still suffer from inconsistencies for facial images in aspects
-of appearance, expression, and temporal coherence. These issues arise from the independent editing of single images and
-the inherent loss of temporal patterns of the editing process.
-In this paper, we introduce AvatarControl, a novel framework
-for editing and generating high-fidelity talking head avatars.
-Instead of performing independent image editing, AvatarControl leverages the correspondence represented by optical flow
-across views and frames to boost the editing consistency.
-Specifically, given a set of talking avatar images rendered by a
-pretrained 3D Gaussian Splatting model, we propose a multi-view consistency module to select reference views based on
-optical flow. These selected frames are then utilized to provide complementary view-consistency for the target image,
-unifying the edited appearance. Further, we propose a temporal consistency module, which applies the optical flow and
-depth map changes of source images to the diffusion process,
-fine-tuning the edited talking head images for better temporal
-stability. Extensive experiments demonstrate that AvatarControl outperforms state-of-the-art methods in terms of appearance, expression, and temporal consistency in edited avatars.
+            Diffusion models have shown impressive potential on talking head
+ generation. Whileplausibleappearanceandtalkingeffectareachieved,
+ these methods still suffer from temporal, 3D or expression inconsistency due to the error accumulation and inherent limitation of
+ single-image generation ability. In this paper, we propose ConsistentAvatar, a novel framework for fully consistent and high
+fidelity talking avatar generation. Instead of directly employing multi-modal conditions to the diffusion process, our method learns
+ to first model the temporal representation for stability between adjacent frames. Specifically, we propose a Temporally-Sensitive
+ Detail (TSD) map containing high-frequency feature and contours
+ that vary significantly along the time axis. Using a temporal consistent diffusion module, we learn to align TSD of the initial result to
+ that of the video frame ground truth. The final avatar is generated
+ by a fully consistent diffusion module, conditioned on the aligned
+ TSD, rough head normal, and emotion prompt embedding. We find
+ that the aligned TSD, which represents the temporal patterns, constrains the diffusion process to generate temporally stable talking
+ head. Further, its reliable guidance complements the inaccuracy
+ of other conditions, suppressing the accumulated error while improving the consistency on various aspects. Extensive experiments
+ demonstrate that ConsistentAvatar outperforms the state-of-the-art methods on the generated appearance, 3D, expression and temporal
+ consistency.
+
           </p>
         </div>
       </div>
